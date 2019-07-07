@@ -19,7 +19,7 @@ class Synonym extends Component {
     return this.props.synonyms.map((e, i) => {
       return (
         <li key={i}>
-          <a onClick={this.handleSynonymClick.bind(this, e.word)}>
+          <a href="" onClick={this.handleSynonymClick.bind(this, e.word)}>
             {e.word}
           </a>
         </li>
@@ -27,18 +27,19 @@ class Synonym extends Component {
     })
   }
 
-  handleSynonymClick = (synonym) => {
+  handleSynonymClick = (synonym, e) => {
+    e.preventDefault();
     const words = this.props.words;
     const word = words[this.props.word];
-    console.log(this.props)
     this.props.useSynonym(word, synonym);
   }
 
   render () {
-    const { value } = this.props.word;
+    const words = this.props.words;
+    const word = words[this.props.word];
     return (
       <div>
-        <h4>{value}</h4>
+        <h4>{word ? word.value : '' }</h4>
         <ul>
           {this.renderSynonyms()}
         </ul>
